@@ -402,6 +402,77 @@
   }
   .demo-banner a { color: var(--dark); font-weight: 500; }
 
+  /* ---- Sub-page styles (SPA) ---- */
+  .page-hero {
+    height: 45vh; min-height: 320px;
+    background-size: cover; background-position: center;
+    position: relative; display: flex; align-items: flex-end;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(transparent 30%, rgba(44,36,32,0.8));
+  }
+  .page-hero-content {
+    position: relative; z-index: 1;
+    max-width: 1000px; margin: 0 auto; padding: 40px 24px; width: 100%;
+  }
+  .page-hero-sub {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 11px; letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .page-hero h1 {
+    font-family: 'Noto Serif TC', serif; font-weight: 900;
+    font-size: 32px; color: var(--cream); letter-spacing: 4px;
+  }
+  .content {
+    max-width: 760px; margin: 0 auto; padding: 60px 24px;
+  }
+  .content p {
+    font-size: 15px; color: #5a514a; line-height: 2.2; margin-bottom: 20px;
+  }
+  .content h2 {
+    font-family: 'Noto Serif TC', serif; font-weight: 600;
+    font-size: 22px; color: var(--brown); margin: 48px 0 16px;
+    padding-left: 16px; border-left: 3px solid var(--gold); letter-spacing: 2px;
+  }
+  .content h2 span {
+    display: block; font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 11px; color: var(--text-light); letter-spacing: 3px;
+    font-weight: 400; margin-top: 2px;
+  }
+  .content img { width: 100%; display: block; margin: 32px 0; border-radius: 2px; }
+  .content blockquote {
+    border-left: 3px solid var(--gold); padding: 16px 24px;
+    margin: 24px 0; background: var(--warm-white);
+    font-style: italic; color: #6a5f56;
+  }
+  .content ul { margin: 0 0 20px 20px; color: #5a514a; }
+  .content ul li { margin-bottom: 8px; }
+  .highlight { color: var(--brown); font-weight: 400; }
+  .divider { width: 40px; height: 2px; background: var(--gold); margin: 32px 0; }
+  .info-box {
+    background: var(--warm-white); border: 1px solid rgba(200,168,124,0.3);
+    padding: 24px; margin: 24px 0; border-radius: 4px;
+  }
+  .info-box h3 {
+    font-family: 'Noto Serif TC', serif; font-weight: 600;
+    font-size: 16px; color: var(--brown); margin-bottom: 12px; letter-spacing: 2px;
+  }
+  .info-box table { width: 100%; font-size: 14px; color: #5a514a; }
+  .info-box td { padding: 8px 0; border-bottom: 1px solid rgba(200,168,124,0.2); }
+  .info-box td:first-child { font-weight: 400; width: 120px; color: var(--brown); }
+  .bean-card {
+    background: var(--warm-white); border: 1px solid rgba(200,168,124,0.3);
+    padding: 24px; margin: 20px 0; border-radius: 4px; border-left: 3px solid var(--gold);
+  }
+  .bean-card h3 {
+    font-family: 'Noto Serif TC', serif; font-weight: 600;
+    font-size: 17px; color: var(--brown); margin-bottom: 4px; letter-spacing: 1px;
+  }
+  .bean-card .origin { font-size: 12px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; }
+  .bean-card p { font-size: 14px; color: #5a514a; line-height: 1.9; margin: 0; }
+
   /* ---- Enter Overlay ---- */
   .enter-overlay {
     position: fixed;
@@ -499,13 +570,17 @@
       <span>Floatté Coffee</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#about">關於我們</a></li>
+      <li><a href="story.html" class="spa-link">品牌故事</a></li>
       <li><a href="#menu">菜單</a></li>
-      <li><a href="#space">空間</a></li>
+      <li><a href="beans.html" class="spa-link">咖啡豆產地</a></li>
+      <li><a href="reserve.html" class="spa-link">空間預約</a></li>
       <li><a href="#info">店舖資訊</a></li>
     </ul>
   </div>
 </nav>
+
+<!-- Main Content Container -->
+<div id="pageContent">
 
 <!-- Hero -->
 <section class="hero">
@@ -537,6 +612,7 @@
         <p>
           空間以<span class="highlight">木質與暖光</span>為基調，搭配綠植與手作選物，營造讓人放鬆的「第三空間」。歡迎你帶一本書、一台筆電，或什麼都不帶，在這裡度過一段屬於自己的煦光時刻。
         </p>
+        <a href="story.html" class="spa-link" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);color:var(--brown);text-decoration:none;font-size:12px;letter-spacing:3px;transition:all 0.3s;margin-top:8px;" onmouseover="this.style.background='var(--gold)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--brown)'">閱讀完整故事 →</a>
       </div>
     </div>
   </div>
@@ -730,6 +806,8 @@
   <div class="footer-credit">Demo website by <a href="https://renstudio.tw">Ren Studio 仁格數位科技工坊</a></div>
 </footer>
 
+</div><!-- end pageContent -->
+
 <!-- Music -->
 <audio id="bgm" src="images/bgm.mp3" loop preload="auto"></audio>
 <button class="music-btn" id="musicBtn" title="音樂開關">♪</button>
@@ -758,8 +836,8 @@
   // BGM + Audio Visualizer
   const bgm = document.getElementById('bgm')
   const musicBtn = document.getElementById('musicBtn')
-  const canvas = document.getElementById('visualizer')
-  const ctx = canvas.getContext('2d')
+  let canvas = document.getElementById('visualizer')
+  let ctx = canvas.getContext('2d')
   bgm.volume = 0.3
 
   let audioCtx, analyser, source, dataArray, bufferLength
@@ -863,6 +941,79 @@
       musicBtn.classList.remove('playing')
     }
   })
+
+  // ---- SPA Navigation ----
+  const pageContent = document.getElementById('pageContent')
+  const homepageHTML = pageContent.innerHTML
+
+  function bindSpaLinks() {
+    document.querySelectorAll('.spa-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        const url = link.getAttribute('href')
+        loadPage(url)
+      })
+    })
+  }
+
+  async function loadPage(url) {
+    try {
+      const res = await fetch(url)
+      const html = await res.text()
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(html, 'text/html')
+
+      // Extract content between nav and footer from sub-page
+      const subNav = doc.querySelector('nav')
+      const subContent = doc.querySelector('.content')
+      const subHero = doc.querySelector('.page-hero')
+
+      if (subContent) {
+        let newHTML = ''
+        if (subHero) newHTML += subHero.outerHTML
+        newHTML += subContent.outerHTML
+
+        // Add back button
+        newHTML = `<div style="max-width:760px;margin:0 auto;padding:20px 24px 0;">
+          <a href="#" class="spa-back" style="color:var(--brown);text-decoration:none;font-size:14px;letter-spacing:1px;">← 返回首頁</a>
+        </div>` + newHTML
+
+        pageContent.innerHTML = newHTML
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        history.pushState({ page: url }, '', url)
+
+        // Bind back button
+        document.querySelector('.spa-back')?.addEventListener('click', (e) => {
+          e.preventDefault()
+          goHome()
+        })
+      }
+    } catch (err) {
+      console.warn('SPA load failed:', err)
+      window.location.href = url
+    }
+  }
+
+  function goHome() {
+    pageContent.innerHTML = homepageHTML
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    history.pushState({ page: 'home' }, '', 'index.html')
+    bindSpaLinks()
+    // Re-init canvas for visualizer
+    const newCanvas = document.getElementById('visualizer')
+    if (newCanvas) {
+      canvas = newCanvas
+      ctx = newCanvas.getContext('2d')
+      resizeCanvas()
+    }
+  }
+
+  // Handle browser back button
+  window.addEventListener('popstate', () => {
+    goHome()
+  })
+
+  bindSpaLinks()
 </script>
 
 </body>

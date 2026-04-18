@@ -1,0 +1,126 @@
+:root {
+  --cream: #f7f3ee; --dark: #2c2420; --brown: #6b5344;
+  --gold: #c8a87c; --sage: #8a9a7b; --text: #3d3530;
+  --text-light: #8a7e75; --warm-white: #faf8f5;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', sans-serif; font-weight: 300;
+  color: var(--text); background: var(--cream);
+  line-height: 1.8; font-size: 15px;
+}
+nav {
+  background: rgba(247,243,238,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(200,168,124,0.2);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1000px; margin: 0 auto;
+}
+.nav-back {
+  text-decoration: none; color: var(--brown); font-size: 14px;
+  font-weight: 400; display: flex; align-items: center; gap: 8px;
+  transition: color 0.3s; letter-spacing: 1px;
+}
+.nav-back:hover { color: var(--gold); }
+.nav-brand {
+  font-family: 'Noto Serif TC', serif; font-weight: 600;
+  font-size: 16px; color: var(--brown); text-decoration: none;
+  letter-spacing: 2px;
+}
+.page-hero {
+  height: 45vh; min-height: 320px;
+  background-size: cover; background-position: center;
+  position: relative; display: flex; align-items: flex-end;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(transparent 30%, rgba(44,36,32,0.8));
+}
+.page-hero-content {
+  position: relative; z-index: 1;
+  max-width: 1000px; margin: 0 auto; padding: 40px 24px; width: 100%;
+}
+.page-hero-sub {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11px; letter-spacing: 4px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.page-hero h1 {
+  font-family: 'Noto Serif TC', serif; font-weight: 900;
+  font-size: 32px; color: var(--cream); letter-spacing: 4px;
+}
+.content {
+  max-width: 760px; margin: 0 auto; padding: 60px 24px;
+}
+.content p {
+  font-size: 15px; color: #5a514a; line-height: 2.2; margin-bottom: 20px;
+}
+.content h2 {
+  font-family: 'Noto Serif TC', serif; font-weight: 600;
+  font-size: 22px; color: var(--brown); margin: 48px 0 16px;
+  padding-left: 16px; border-left: 3px solid var(--gold);
+  letter-spacing: 2px;
+}
+.content h2 span {
+  display: block; font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11px; color: var(--text-light); letter-spacing: 3px;
+  font-weight: 400; margin-top: 2px;
+}
+.content img {
+  width: 100%; display: block; margin: 32px 0; border-radius: 2px;
+}
+.content blockquote {
+  border-left: 3px solid var(--gold); padding: 16px 24px;
+  margin: 24px 0; background: var(--warm-white);
+  font-style: italic; color: #6a5f56;
+}
+.content ul { margin: 0 0 20px 20px; color: #5a514a; }
+.content ul li { margin-bottom: 8px; }
+.highlight { color: var(--brown); font-weight: 400; }
+.divider {
+  width: 40px; height: 2px; background: var(--gold); margin: 32px 0;
+}
+.info-box {
+  background: var(--warm-white); border: 1px solid rgba(200,168,124,0.3);
+  padding: 24px; margin: 24px 0; border-radius: 4px;
+}
+.info-box h3 {
+  font-family: 'Noto Serif TC', serif; font-weight: 600;
+  font-size: 16px; color: var(--brown); margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.info-box table { width: 100%; font-size: 14px; color: #5a514a; }
+.info-box td {
+  padding: 8px 0; border-bottom: 1px solid rgba(200,168,124,0.2);
+}
+.info-box td:first-child {
+  font-weight: 400; width: 120px; color: var(--brown);
+}
+.bean-card {
+  background: var(--warm-white); border: 1px solid rgba(200,168,124,0.3);
+  padding: 24px; margin: 20px 0; border-radius: 4px;
+  border-left: 3px solid var(--gold);
+}
+.bean-card h3 {
+  font-family: 'Noto Serif TC', serif; font-weight: 600;
+  font-size: 17px; color: var(--brown); margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+.bean-card .origin {
+  font-size: 12px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px;
+}
+.bean-card p { font-size: 14px; color: #5a514a; line-height: 1.9; margin: 0; }
+footer {
+  background: var(--dark); color: rgba(247,243,238,0.5);
+  padding: 32px 24px; text-align: center; font-size: 12px; margin-top: 60px;
+}
+footer a { color: var(--gold); text-decoration: none; }
+.demo-banner {
+  position: fixed; bottom: 0; width: 100%; z-index: 100;
+  background: var(--gold); color: var(--dark);
+  text-align: center; padding: 10px; font-size: 13px;
+}
+.demo-banner a { color: var(--dark); font-weight: 500; }
+@media (max-width: 600px) {
+  .page-hero h1 { font-size: 24px; }
+}
