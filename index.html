@@ -824,14 +824,17 @@
   })
 
   // Menu category tabs
-  document.querySelectorAll('.menu-cat-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'))
-      btn.classList.add('active')
-      document.querySelectorAll('.menu-panel').forEach(p => p.style.display = 'none')
-      document.getElementById('menu-' + btn.dataset.cat).style.display = ''
+  function bindMenuTabs() {
+    document.querySelectorAll('.menu-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'))
+        btn.classList.add('active')
+        document.querySelectorAll('.menu-panel').forEach(p => p.style.display = 'none')
+        document.getElementById('menu-' + btn.dataset.cat).style.display = ''
+      })
     })
-  })
+  }
+  bindMenuTabs()
 
   // BGM + Audio Visualizer
   const bgm = document.getElementById('bgm')
@@ -999,6 +1002,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' })
     history.pushState({ page: 'home' }, '', 'index.html')
     bindSpaLinks()
+    bindMenuTabs()
     // Re-init canvas for visualizer
     const newCanvas = document.getElementById('visualizer')
     if (newCanvas) {
