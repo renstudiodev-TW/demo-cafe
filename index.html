@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>煦渡珈琲 Floatté Coffee</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --dark: #2c2420;
+    --brown: #6b5344;
+    --gold: #c8a87c;
+    --sage: #8a9a7b;
+    --light-sage: #e8ede4;
+    --warm-white: #faf8f5;
+    --text: #3d3530;
+    --text-light: #8a7e75;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    background: var(--cream);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ---- Navigation ---- */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(247, 243, 238, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200, 168, 124, 0.2);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--brown);
+    text-decoration: none;
+    letter-spacing: 2px;
+  }
+  .nav-logo span {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--text-light);
+    display: block;
+    letter-spacing: 3px;
+    margin-top: -2px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: var(--brown); }
+
+  /* ---- Hero ---- */
+  .hero {
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('images/hero.jpg') center/cover no-repeat;
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(44, 36, 32, 0.6);
+    z-index: 1;
+  }
+  .hero-canvas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 3; padding: 0 24px; }
+  .hero-sub {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 8vw, 72px);
+    letter-spacing: 8px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .hero-en {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: clamp(14px, 2.5vw, 20px);
+    letter-spacing: 8px;
+    color: rgba(247,243,238,0.5);
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+  .hero-tagline {
+    font-size: 14px;
+    color: rgba(247,243,238,0.7);
+    letter-spacing: 4px;
+    margin-bottom: 48px;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 4px;
+    transition: all 0.4s;
+  }
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--dark);
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(247,243,238,0.3);
+    font-size: 11px;
+    letter-spacing: 3px;
+    animation: float 2s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ---- Section Common ---- */
+  .section {
+    padding: 100px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 16px;
+    letter-spacing: 3px;
+  }
+  .section-desc {
+    color: var(--text-light);
+    max-width: 560px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    line-height: 2;
+  }
+
+  /* ---- About ---- */
+  .about-bg { background: var(--warm-white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-image {
+    aspect-ratio: 4/5;
+    background: url('images/about.jpg') center/cover no-repeat;
+    border-radius: 2px;
+  }
+  .about-text p {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 2.2;
+    margin-bottom: 20px;
+  }
+  .about-text .highlight {
+    color: var(--brown);
+    font-weight: 400;
+  }
+
+  /* ---- Menu ---- */
+  .menu-categories {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .menu-cat-btn {
+    padding: 8px 24px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--brown);
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .menu-cat-btn.active, .menu-cat-btn:hover {
+    background: var(--gold);
+    color: #fff;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(200,168,124,0.2);
+  }
+  .menu-item-name {
+    font-weight: 400;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .menu-item-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .menu-item-price {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 15px;
+    color: var(--brown);
+    white-space: nowrap;
+    margin-left: 24px;
+    font-weight: 500;
+  }
+
+  /* ---- Space / Gallery ---- */
+  .space-bg { background: var(--warm-white); }
+  .space-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .space-item {
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    transition: transform 0.3s;
+  }
+  .space-item:hover { transform: scale(1.02); }
+  .space-item.tall { grid-row: span 2; aspect-ratio: auto; }
+
+  /* ---- Info ---- */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .info-card {
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .info-icon {
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .info-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    fill: none;
+  }
+  .info-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .info-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    background: var(--dark);
+    color: rgba(247,243,238,0.6);
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+  }
+  .footer-en {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(247,243,238,0.3);
+    margin-bottom: 24px;
+  }
+  .footer-info {
+    font-size: 13px;
+    line-height: 2;
+    margin-bottom: 32px;
+  }
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .footer-social a {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(247,243,238,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  .footer-social a:hover { border-color: var(--gold); }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(247,243,238,0.25);
+    letter-spacing: 1px;
+  }
+  .footer-credit {
+    margin-top: 8px;
+    font-size: 11px;
+    color: rgba(247,243,238,0.2);
+  }
+  .footer-credit a { color: var(--gold); text-decoration: none; }
+
+  /* ---- Demo Banner ---- */
+  .demo-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--gold);
+    color: var(--dark);
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    z-index: 100;
+    font-weight: 400;
+  }
+  .demo-banner a { color: var(--dark); font-weight: 500; }
+
+  /* ---- Enter Overlay ---- */
+  .enter-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 9999;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease;
+  }
+  .enter-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .enter-logo {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: clamp(36px, 7vw, 56px);
+    color: var(--cream);
+    letter-spacing: 8px;
+    margin-bottom: 8px;
+  }
+  .enter-en {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: rgba(247,243,238,0.4);
+    margin-bottom: 48px;
+  }
+  .enter-hint {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    animation: enter-pulse 2s ease-in-out infinite;
+  }
+  @keyframes enter-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* ---- Music Toggle ---- */
+  .music-btn {
+    position: fixed;
+    bottom: 50px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: rgba(247,243,238,0.95);
+    color: var(--brown);
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .music-btn:hover { background: var(--gold); color: #fff; }
+  .music-btn.playing { animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+    50% { box-shadow: 0 2px 20px rgba(200,168,124,0.4); }
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .space-grid { grid-template-columns: 1fr 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Enter Overlay -->
+<div class="enter-overlay" id="enterOverlay">
+  <div class="enter-logo">煦渡珈琲</div>
+  <div class="enter-en">Floatté Coffee</div>
+  <div class="enter-hint">— 點擊進入 —</div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      煦渡珈琲
+      <span>Floatté Coffee</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">關於我們</a></li>
+      <li><a href="#menu">菜單</a></li>
+      <li><a href="#space">空間</a></li>
+      <li><a href="#info">店舖資訊</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <canvas class="hero-canvas" id="visualizer"></canvas>
+  <div class="hero-content">
+    <div class="hero-sub">Since 2019 · Kaohsiung</div>
+    <h1>煦渡珈琲</h1>
+    <div class="hero-en">Floatté Coffee</div>
+    <div class="hero-tagline">在溫暖的渡口，遇見一杯好咖啡</div>
+    <a href="#menu" class="hero-cta">探索菜單</a>
+  </div>
+  <div class="hero-scroll">SCROLL ↓</div>
+</section>
+
+<!-- About -->
+<section class="about-bg">
+  <div class="section" id="about">
+    <div class="about-grid">
+      <div class="about-image"></div>
+      <div class="about-text">
+        <div class="section-label">Our Story</div>
+        <div class="section-title">關於煦渡</div>
+        <p>
+          煦渡珈琲誕生於高雄的一個安靜角落。<span class="highlight">「煦」是清晨的第一道暖陽，「渡」是人生旅途中的短暫停靠。</span>我們相信，一杯用心沖煮的咖啡，能讓匆忙的腳步慢下來。
+        </p>
+        <p>
+          店內選用來自世界各地的<span class="highlight">精品咖啡豆</span>，由專業烘豆師淺中焙處理，保留產區風味。無論是衣索比亞的花果香、瓜地馬拉的巧克力韻，還是台灣阿里山的蜜甜——每一杯，都是一趟風味的旅行。
+        </p>
+        <p>
+          空間以<span class="highlight">木質與暖光</span>為基調，搭配綠植與手作選物，營造讓人放鬆的「第三空間」。歡迎你帶一本書、一台筆電，或什麼都不帶，在這裡度過一段屬於自己的煦光時刻。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<div class="section" id="menu">
+  <div class="section-label">Menu</div>
+  <div class="section-title">飲品菜單</div>
+  <div class="section-desc">每一杯都由職人手工沖煮，使用當季精選豆款。</div>
+
+  <div class="menu-categories">
+    <button class="menu-cat-btn active" data-cat="pourover">手沖單品</button>
+    <button class="menu-cat-btn" data-cat="espresso">義式咖啡</button>
+    <button class="menu-cat-btn" data-cat="special">特調飲品</button>
+    <button class="menu-cat-btn" data-cat="food">輕食甜點</button>
+  </div>
+
+  <!-- 手沖單品 -->
+  <div class="menu-grid menu-panel" id="menu-pourover">
+    <div class="menu-item">
+      <div><div class="menu-item-name">衣索比亞 耶加雪菲</div><div class="menu-item-desc">花香、柑橘、茉莉，水洗處理</div></div>
+      <div class="menu-item-price">$180</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">瓜地馬拉 安提瓜</div><div class="menu-item-desc">可可、堅果、焦糖，水洗處理</div></div>
+      <div class="menu-item-price">$180</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">肯亞 涅里 AA</div><div class="menu-item-desc">黑莓、番茄、葡萄柚，水洗處理</div></div>
+      <div class="menu-item-price">$200</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">台灣 阿里山 蜜處理</div><div class="menu-item-desc">蜂蜜、烏龍茶、柑橘，蜜處理</div></div>
+      <div class="menu-item-price">$220</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">巴拿馬 翡翠莊園 藝伎</div><div class="menu-item-desc">玫瑰、佛手柑、蜜桃，日曬處理</div></div>
+      <div class="menu-item-price">$350</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">哥倫比亞 薇拉</div><div class="menu-item-desc">黑櫻桃、紅糖、奶油，厭氧處理</div></div>
+      <div class="menu-item-price">$200</div>
+    </div>
+  </div>
+
+  <!-- 義式咖啡 -->
+  <div class="menu-grid menu-panel" id="menu-espresso" style="display:none">
+    <div class="menu-item">
+      <div><div class="menu-item-name">煦渡拿鐵</div><div class="menu-item-desc">雙份濃縮 + 鮮奶，經典溫潤</div></div>
+      <div class="menu-item-price">$150</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">卡布奇諾</div><div class="menu-item-desc">濃縮 + 綿密奶泡，肉桂粉點綴</div></div>
+      <div class="menu-item-price">$140</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">美式咖啡</div><div class="menu-item-desc">雙份濃縮 + 熱水，清爽乾淨</div></div>
+      <div class="menu-item-price">$110</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">焦糖瑪奇朵</div><div class="menu-item-desc">香草糖漿 + 鮮奶 + 濃縮 + 焦糖醬</div></div>
+      <div class="menu-item-price">$160</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">摩卡咖啡</div><div class="menu-item-desc">濃縮 + 巧克力醬 + 鮮奶 + 鮮奶油</div></div>
+      <div class="menu-item-price">$160</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">燕麥拿鐵</div><div class="menu-item-desc">雙份濃縮 + OATLY 燕麥奶</div></div>
+      <div class="menu-item-price">$170</div>
+    </div>
+  </div>
+
+  <!-- 特調飲品 -->
+  <div class="menu-grid menu-panel" id="menu-special" style="display:none">
+    <div class="menu-item">
+      <div><div class="menu-item-name">黑糖煦光</div><div class="menu-item-desc">手炒黑糖 + 燕麥奶 + 濃縮，招牌特調</div></div>
+      <div class="menu-item-price">$170</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">渡口氣泡飲</div><div class="menu-item-desc">冷萃咖啡 + 接骨木糖漿 + 氣泡水</div></div>
+      <div class="menu-item-price">$160</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">抹茶白玉</div><div class="menu-item-desc">京都宇治抹茶 + 鮮奶 + 手作白玉</div></div>
+      <div class="menu-item-price">$180</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">柚香冷萃</div><div class="menu-item-desc">12 小時冷萃 + 柚子蜜 + 氣泡水</div></div>
+      <div class="menu-item-price">$160</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">煦渡可可</div><div class="menu-item-desc">法芙娜可可 + 鮮奶 + 棉花糖，冬季限定</div></div>
+      <div class="menu-item-price">$150</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">檸檬咖啡通寧</div><div class="menu-item-desc">濃縮 + 通寧水 + 新鮮檸檬片</div></div>
+      <div class="menu-item-price">$150</div>
+    </div>
+  </div>
+
+  <!-- 輕食甜點 -->
+  <div class="menu-grid menu-panel" id="menu-food" style="display:none">
+    <div class="menu-item">
+      <div><div class="menu-item-name">巴斯克乳酪蛋糕</div><div class="menu-item-desc">每日手作，濃郁焦香</div></div>
+      <div class="menu-item-price">$120</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">司康佐季節果醬</div><div class="menu-item-desc">英式鬆餅，搭配手作果醬與奶油</div></div>
+      <div class="menu-item-price">$100</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">肉桂捲</div><div class="menu-item-desc">現烤肉桂捲，淋上奶油糖霜</div></div>
+      <div class="menu-item-price">$90</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">煦渡三明治</div><div class="menu-item-desc">煙燻鮭魚 + 酪梨 + 酸種麵包</div></div>
+      <div class="menu-item-price">$180</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">每日手作布丁</div><div class="menu-item-desc">焦糖雞蛋布丁，口感滑順綿密</div></div>
+      <div class="menu-item-price">$80</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">堅果穀物碗</div><div class="menu-item-desc">希臘優格 + 綜合莓果 + 自製穀麥</div></div>
+      <div class="menu-item-price">$150</div>
+    </div>
+  </div>
+</div>
+
+<!-- Space -->
+<section class="space-bg">
+  <div class="section" id="space">
+    <div class="section-label">Space</div>
+    <div class="section-title">空間一隅</div>
+    <div class="section-desc">木質溫潤、光影流動，一個讓你放慢腳步的角落。</div>
+
+    <div class="space-grid">
+      <div class="space-item tall" style="background-image: url('images/space1.jpg')"></div>
+      <div class="space-item" style="background-image: url('images/space2.jpg')"></div>
+      <div class="space-item" style="background-image: url('images/space3.jpg')"></div>
+      <div class="space-item" style="background-image: url('images/space4.jpg')"></div>
+      <div class="space-item" style="background-image: url('images/space5.jpg')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Info -->
+<div class="section" id="info">
+  <div class="section-label">Information</div>
+  <div class="section-title">店舖資訊</div>
+  <div class="section-desc"></div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <h3>地址</h3>
+      <p>高雄市前金區中正四路 211 號<br>（近捷運市議會站 2 號出口）</p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>營業時間</h3>
+      <p>
+        週一至週五　09:00 – 18:00<br>
+        週六、週日　10:00 – 19:00<br>
+        每週三公休
+      </p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <h3>聯絡方式</h3>
+      <p>
+        電話：0976-858-794<br>
+        Email：ren.studio.dev@gmail.com<br>
+        LINE：renstudio.tw
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">煦渡珈琲</div>
+  <div class="footer-en">Floatté Coffee</div>
+  <div class="footer-info">
+    高雄市前金區中正四路 211 號<br>
+    0976-858-794 · 週三公休
+  </div>
+  <div class="footer-copy">© 2026 煦渡珈琲 Floatté Coffee. All rights reserved.</div>
+  <div class="footer-credit">Demo website by <a href="https://renstudio.tw">Ren Studio 仁格數位科技工坊</a></div>
+</footer>
+
+<!-- Music -->
+<audio id="bgm" src="images/bgm.mp3" loop preload="auto"></audio>
+<button class="music-btn" id="musicBtn" title="音樂開關">♪</button>
+
+<!-- Demo Banner -->
+<div class="demo-banner">
+  此為 <a href="https://renstudio.tw">Ren Studio</a> 製作之網站展示範例，非真實店家
+</div>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50)
+  })
+
+  // Menu category tabs
+  document.querySelectorAll('.menu-cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      document.querySelectorAll('.menu-panel').forEach(p => p.style.display = 'none')
+      document.getElementById('menu-' + btn.dataset.cat).style.display = ''
+    })
+  })
+
+  // BGM + Audio Visualizer
+  const bgm = document.getElementById('bgm')
+  const musicBtn = document.getElementById('musicBtn')
+  const canvas = document.getElementById('visualizer')
+  const ctx = canvas.getContext('2d')
+  bgm.volume = 0.3
+
+  let audioCtx, analyser, source, dataArray, bufferLength
+  let visualizerReady = false
+
+  function initVisualizer() {
+    if (visualizerReady) return
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    analyser = audioCtx.createAnalyser()
+    source = audioCtx.createMediaElementSource(bgm)
+    source.connect(analyser)
+    analyser.connect(audioCtx.destination)
+    analyser.fftSize = 2048
+    bufferLength = analyser.frequencyBinCount
+    dataArray = new Uint8Array(bufferLength)
+    visualizerReady = true
+    resizeCanvas()
+  }
+
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+  }
+  window.addEventListener('resize', () => { if (visualizerReady) resizeCanvas() })
+
+  let time = 0
+
+  function drawVisualizer() {
+    requestAnimationFrame(drawVisualizer)
+    time += 0.008
+
+    const w = canvas.offsetWidth
+    const h = canvas.offsetHeight
+    ctx.clearRect(0, 0, w, h)
+
+    // Get audio energy for subtle reactivity
+    let energy = 0
+    if (visualizerReady) {
+      analyser.getByteFrequencyData(dataArray)
+      for (let i = 0; i < bufferLength; i++) energy += dataArray[i]
+      energy = energy / bufferLength / 255
+    }
+
+    const goldR = 200, goldG = 168, goldB = 124
+    const waves = [
+      { y: 0.55, amp: 25, freq: 0.008, speed: 1, alpha: 0.5, width: 2 },
+      { y: 0.50, amp: 18, freq: 0.012, speed: 1.4, alpha: 0.35, width: 1.5 },
+      { y: 0.60, amp: 30, freq: 0.006, speed: 0.7, alpha: 0.3, width: 2.5 },
+      { y: 0.45, amp: 12, freq: 0.015, speed: 1.8, alpha: 0.2, width: 1 },
+    ]
+
+    for (const wave of waves) {
+      const ampBoost = 1 + energy * 1.5
+      ctx.beginPath()
+      ctx.lineWidth = wave.width
+      ctx.strokeStyle = `rgba(${goldR}, ${goldG}, ${goldB}, ${wave.alpha + energy * 0.15})`
+
+      for (let x = 0; x <= w; x += 2) {
+        const y = h * wave.y
+          + Math.sin(x * wave.freq + time * wave.speed) * wave.amp * ampBoost
+          + Math.sin(x * wave.freq * 0.5 + time * wave.speed * 0.6) * wave.amp * 0.5 * ampBoost
+        if (x === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.stroke()
+    }
+  }
+
+  drawVisualizer()
+
+  function startMusic() {
+    try { initVisualizer() } catch(e) { console.warn('Visualizer init failed:', e) }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume()
+    bgm.play().then(() => {
+      musicBtn.classList.add('playing')
+    }).catch((e) => { console.warn('Play failed:', e) })
+  }
+
+  // Enter overlay triggers music
+  let musicStarted = false
+  const overlay = document.getElementById('enterOverlay')
+
+  overlay.addEventListener('click', () => {
+    if (musicStarted) return
+    musicStarted = true
+    startMusic()
+    overlay.classList.add('fade-out')
+    setTimeout(() => overlay.remove(), 800)
+  })
+
+  // Toggle button
+  musicBtn.addEventListener('click', () => {
+    if (!musicStarted) { tryAutoPlay(); return }
+    if (bgm.paused) {
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume()
+      bgm.play()
+      musicBtn.classList.add('playing')
+    } else {
+      bgm.pause()
+      musicBtn.classList.remove('playing')
+    }
+  })
+</script>
+
+</body>
+</html>
