@@ -2,13 +2,20 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<title>空間預約 — 煦渡珈琲</title>
+<title>【示範網站】空間預約 — 煦渡珈琲</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="page.css">
 </head>
 <body>
+<!-- Demo Notice Bar -->
+<div class="demo-bar" id="demoBar" role="region" aria-label="示範網站說明">
+  <span><b>⚠ 示範網站</b>｜「煦渡珈琲」是 Ren Studio 製作的虛構品牌，不是真實公司，無法訂位或提供餐飲</span>
+  <a href="https://renstudio.tw" target="_blank" rel="noopener">想做這樣的網站？聯絡 Ren Studio</a>
+</div>
+
 <nav>
   <a href="index.html" class="nav-back">← 返回首頁</a>
   <a href="index.html" class="nav-brand">煦渡珈琲</a>
@@ -98,9 +105,9 @@
   <p>請透過以下方式聯繫我們，告知活動日期、人數、活動類型，我們會在 24 小時內回覆確認：</p>
 
   <ul>
-    <li><strong>Email：</strong>ren.studio.dev@gmail.com</li>
-    <li><strong>LINE：</strong>renstudio.tw</li>
-    <li><strong>電話：</strong>0976-858-794</li>
+    <li><strong>Email：</strong>service@example.com（示範）</li>
+    <li><strong>LINE：</strong>示範帳號</li>
+    <li><strong>電話：</strong>07-000-0000（示範號碼）</li>
   </ul>
 
   <blockquote>
@@ -109,9 +116,24 @@
 </div>
 
 <footer>
-  © 2026 煦渡珈琲 Floatté Coffee ・ Demo by <a href="https://renstudio.tw">Ren Studio</a>
+  © 2026 示範網站．「煦渡珈琲」為虛構品牌 ・ 網站製作：<a href="https://renstudio.tw">Ren Studio 仁格數位科技工坊</a>
 </footer>
-<div class="demo-banner">此為 <a href="https://renstudio.tw">Ren Studio</a> 製作之網站展示範例，非真實店家</div>
+<!-- Demo Notice Dialog -->
+<div class="demo-modal" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="demoTitle" hidden>
+  <div class="demo-modal-card">
+    <h2 id="demoTitle">這是示範網站</h2>
+    <p>「煦渡珈琲」是 Ren Studio 製作的虛構品牌，不是真實店家，無法訂位或提供餐飲。頁面上的電話、地址、Email 等聯絡資訊都不是真實店家資訊，請勿撥打或前往。</p>
+    <div class="demo-modal-box">
+      <strong>想製作類似網站或購買此網站版型，歡迎聯絡 Ren Studio 仁格數位科技工坊</strong>
+      電話：<a href="tel:0976858794">0976-858-794</a><br>
+      Email：<a href="mailto:ren.studio.dev@gmail.com">ren.studio.dev@gmail.com</a><br>
+      官網：<a href="https://renstudio.tw" target="_blank" rel="noopener">https://renstudio.tw</a>
+    </div>
+    <button type="button" class="demo-modal-ok" id="demoOk">我知道了，繼續瀏覽</button>
+  </div>
+</div>
+
 <script src="bgm.js"></script>
+<script src="demo-notice.js"></script>
 </body>
 </html>
